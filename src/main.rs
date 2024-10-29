@@ -20,10 +20,12 @@ async fn manual_hello() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         let cors = Cors::default()
-            .send_wildcard()
-            .allowed_methods(vec!["GET", "POST"])
-            .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
-            .allowed_header(header::CONTENT_TYPE)
+//            .allowed_origin("http://127.0.0.1:8088")
+            //.allowed_origin("no-cors")
+            .allow_any_origin()
+            .allow_any_header()
+            .allow_any_method()
+            .expose_any_header()
             .supports_credentials()
             .max_age(3600);
         App::new()
